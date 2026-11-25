@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f5f9;
+            margin: 0;
+            padding: 25px;
+            color: #333;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #1e3a5f;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .form-box {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px #00000015;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        select {
+            background-color: #f8fafc;
+            cursor: pointer;
+        }
+
+        select option {
+            padding: 10px;
+            background-color: white;
+            color: #333;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .full-width {
+            grid-column: 1 / 3;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            color: white;
+            margin: 5px;
+        }
+
+        .submit-btn {
+            background-color: #2563eb;
+        }
+
+        .submit-btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        .reset-btn {
+            background-color: #64748b;
+        }
+
+        .reset-btn:hover {
+            background-color: #475569;
+        }
+
+        .delete-btn {
+            background-color: #dc2626;
+            padding: 7px 12px;
+        }
+
+        .delete-btn:hover {
+            background-color: #b91c1c;
+        }
+
+        .clear-btn {
+            background-color: #dc2626;
+        }
+
+        .button-area {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .table-box {
+            background-color: white;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px #00000015;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            white-space: nowrap;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #1e40af;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f1f5f9;
+        }
+
+        tr:hover {
+            background-color: #e2e8f0;
+        }
+
+        @media (max-width: 650px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: 1;
+            }
+
+            body {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Student Information System</h1>
+
+    <!-- Student Form -->
+    <div class="form-box">
+
+        <h2>Student Information Form</h2>
+
+        <form id="studentForm">
+
+            <div class="form-grid">
+
+                <!-- Personal Information -->
+
+                <div>
+                    <label for="fullname">Full Name:</label>
+                    <input type="text" id="fullname" required>
+                </div>
+
+                <div>
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" min="1" required>
+                </div>
+
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" required>
+                </div>
+
+                <div>
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone">
+                </div>
+
+                <div>
+                    <label for="gender">Gender:</label>
+                    <select id="gender" required>
+                        <option value="Male" aria-checked="true">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="division">Division:</label>
+                    <select id="division" required>
+                        <option value="">Select Division</option>
+                        <option value="Dhaka">Dhaka</option>
+                        <option value="Chattogram">Chattogram</option>
+                        <option value="Rajshahi">Rajshahi</option>
+                        <option value="Khulna">Khulna</option>
+                        <option value="Barishal">Barishal</option>
+                        <option value="Sylhet">Sylhet</option>
+                        <option value="Rangpur">Rangpur</option>
+                        <option value="Mymensingh">Mymensingh</option>
+                    </select>
+                </div>
+
+                <div class="full-width">
+                    <label for="address">Address:</label>
+                    <textarea id="address" rows="3"></textarea>
+                </div>
+
+                <!-- Academic Information -->
+
+                <div>
+                    <label for="department">Department:</label>
+                    <input type="text" id="department" required>
+                </div>
+
+                <div>
+                    <label for="year">Year:</label>
+                    <input type="number" id="year" min="1" max="4" required>
+                </div>
+
+                <div>
+                    <label for="cgpa">CGPA:</label>
+                    <input type="number" id="cgpa"
+                           step="0.01" min="0" max="4" required>
+                </div>
+
+            </div>
+
+            <div class="button-area">
+                <button type="submit" class="submit-btn">
+                    Submit
+                </button>
+
+                <button type="reset" class="reset-btn">
+                    Reset
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+
+    <!-- Personal Information Table -->
+
+    <div class="table-box">
+
+        <h2>Personal Information</h2>
+
+        <div class="table-container">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Full Name</th>
+                        <th>Age</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Gender</th>
+                        <th>Division</th>
+                        <th>Address</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="personalTable"></tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+
+    <!-- Academic Information Table -->
+
+    <div class="table-box">
+
+        <h2>Academic Information</h2>
+
+        <div class="table-container">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Full Name</th>
+                        <th>Department</th>
+                        <th>Year</th>
+                        <th>CGPA</th>
+                    </tr>
+                </thead>
+
+                <tbody id="academicTable"></tbody>
+
+            </table>
+
+        </div>
+
+        <div class="button-area">
+            <button class="clear-btn" onclick="clearAllData()">
+                Clear All Data
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    // Get saved data from localStorage
+
+    let students = JSON.parse(
+        localStorage.getItem("students")
+    ) || [];
+
+
+    // Save data in localStorage
+
+    function saveData() {
+
+        localStorage.setItem(
+            "students",
+            JSON.stringify(students)
+        );
+
+    }
+
+
+    // Submit Form Function
+
+    document.getElementById("studentForm").addEventListener(
+        "submit", function(event) {
+
+            event.preventDefault();
+
+            let student = {
+
+                id: Date.now(),
+
+                fullname: document.getElementById("fullname").value,
+                age: document.getElementById("age").value,
+                email: document.getElementById("email").value,
+                phone: document.getElementById("phone").value,
+                gender: document.getElementById("gender").value,
+                division: document.getElementById("division").value,
+                address: document.getElementById("address").value,
+
+                department: document.getElementById("department").value,
+                year: document.getElementById("year").value,
+                cgpa: document.getElementById("cgpa").value
+
+            };
+
+
+            // Add student to array
+
+            students.push(student);
+
+
+            // Save and display data
+
+            saveData();
+            displayData();
+
+
+            // Reset form
+
+            this.reset();
+
+            alert("Student information saved successfully!");
+
+        }
+    );
+
+
+    // Display Data Function
+
+    function displayData() {
+
+        let personalTable =
+            document.getElementById("personalTable");
+
+        let academicTable =
+            document.getElementById("academicTable");
+
+
+        // Clear previous table data
+
+        personalTable.innerHTML = "";
+        academicTable.innerHTML = "";
+
+
+        // Display each student's information
+
+        students.forEach(function(student, index) {
+
+            // Personal Information Row
+
+            let pRow = personalTable.insertRow();
+
+            let personalData = [
+                index + 1,
+                student.fullname,
+                student.age,
+                student.email,
+                student.phone,
+                student.gender,
+                student.division,
+                student.address
+            ];
+
+            personalData.forEach(function(value) {
+
+                let cell = pRow.insertCell();
+                cell.textContent = value;
+
+            });
+
+
+            // Delete Button
+
+            let actionCell = pRow.insertCell();
+
+            let deleteButton = document.createElement("button");
+
+            deleteButton.textContent = "Delete";
+            deleteButton.className = "delete-btn";
+
+            deleteButton.onclick = function() {
+                deleteStudent(student.id);
+            };
+
+            actionCell.appendChild(deleteButton);
+
+
+            // Academic Information Row
+
+            let aRow = academicTable.insertRow();
+
+            let academicData = [
+                index + 1,
+                student.fullname,
+                student.department,
+                student.year,
+                student.cgpa
+            ];
+
+            academicData.forEach(function(value) {
+
+                let cell = aRow.insertCell();
+                cell.textContent = value;
+
+            });
+
+        });
+
+    }
+
+
+    // Delete Student Function
+
+    function deleteStudent(id) {
+
+        if (confirm("Are you sure you want to delete this student?")) {
+
+            students = students.filter(function(student) {
+
+                return student.id !== id;
+
+            });
+
+            saveData();
+            displayData();
+
+        }
+
+    }
+
+
+    // Clear All Data Function
+
+    function clearAllData() {
+
+        if (confirm("Are you sure you want to delete all student records?")) {
+
+            students = [];
+
+            saveData();
+            displayData();
+
+        }
+
+    }
+
+
+    // Display previously saved data when page loads
+
+    displayData();
+
+</script>
+
+</body>
+</html>
